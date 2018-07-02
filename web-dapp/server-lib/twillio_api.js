@@ -12,7 +12,11 @@ const smsClient = new twilio(accountSid, authToken);
 
 function verify_tel(telNumber) {
     return new Promise((resolve, reject) => {
+      if(telNumber.length > 30) {
+        reject(new Error("telNumber is too long"));
+      }else{
         return resolve(telNumber);
+      }
     });
 }
 
@@ -28,11 +32,11 @@ function send_text(wallet, toTelNumber, txId, confirmationCodePlain, done) {
     */
   })
   .then(function(message) {
-    done(null, message)
+    done(null, message);
   })
   .catch(function(err) {
-    done(err)
-  })
+    done(err);
+  });
 }
 
 module.exports = {
