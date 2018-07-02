@@ -4,7 +4,7 @@ import * as log from 'loglevel';
 
 import Header from './Header';
 import Footer from './Footer';
-import RegisterAddressPage from './RegisterAddressPage';
+import RegisterPhoneNumberPage from './RegisterPhoneNumberPage';
 import ConfirmationPage from './ConfirmationPage';
 import MyAddressesPage from './MyAddressesPage';
 import IndexPage from "./IndexPage";
@@ -17,6 +17,7 @@ const WEB3_CHECKER_INTERV_MS = 500;
 const GOOGLE_CHROME_URL = 'https://www.google.com/chrome/browser';
 const META_MASK_URL = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn';
 
+log.setLevel("debug", true)
 const logger = log.getLogger('App');
 
 class App extends Component {
@@ -128,7 +129,7 @@ class App extends Component {
                                     <Header/>
                                     <Route exact path="/" component={() => <IndexPage />}/>
                                     <Route exact path="/help" component={() => <HelpPage />}/>
-                                    <Route path="/register" component={() => <RegisterAddressPage my_web3={this.state.my_web3}
+                                    <Route path="/register" component={() => <RegisterPhoneNumberPage my_web3={this.state.my_web3}
                                                                                                 contract={this.state.contract}/>}/>
                                     <Route path="/confirm" component={() => <ConfirmationPage my_web3={this.state.my_web3}
                                                                                               contract={this.state.contract}/>}/>

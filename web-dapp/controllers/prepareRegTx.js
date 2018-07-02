@@ -5,7 +5,7 @@ const generateCode = require('../server-lib/generate_code');
 const recalcPrice = require('../server-lib/recalc_price');
 const buildSignature = require('../server-lib/buildSignature');
 const db = require('../server-lib/session_store');
-const postAPI = require('../server-lib/post_api');
+const twilioApi = require('../server-lib/twillio_api');
 
 const signerPrivateKey = config.signerPrivateKey;
 
@@ -15,20 +15,8 @@ const validateWallet = (body) => {
 const validateName = (body) => {
     return validateParams(body, 'name');
 };
-const validateCountry = (body) => {
-    return validateParams(body, 'country');
-};
-const validateState = (body) => {
-    return validateParams(body, 'state');
-};
-const validateCity = (body) => {
-    return validateParams(body, 'city');
-};
-const validateAddress = (body) => {
-    return validateParams(body, 'address');
-};
-const validateZip = (body) => {
-    return validateParams(body, 'zip');
+const validatePhone = (body) => {
+    return validateParams(body, 'phone');
 };
 const validateParams = (body, param) => {
     return new Promise((resolve, reject) => {
@@ -48,23 +36,13 @@ const validateData = (data = {}) => {
     })
         .then(validateWallet)
         .then(validateName)
-        .then(validateCountry)
-        .then(validateState)
-        .then(validateCity)
-        .then(validateAddress)
-        .then(validateZip)
-        .then(verifyAddress)
+        .then(validatePhone)
+        .then(verifyPhone)
         .then(normalizeData);
 };
 
-const verifyAddress = (params) => {
-    const address = {
-        state: params.state,
-        city: params.city,
-        location: params.address,
-        zip: params.zip,
-    };
-    return postAPI.verify_address(address)
+const verifyPhone = (params) => {
+    return twilioApi.verify_tel(params.phone)
         .then(() => params);
 };
 
@@ -72,11 +50,7 @@ const normalizeData = (data) => {
     const wallet = data.wallet;
     const params = {
         name: normalize.string(data.name),
-        country: normalize.string(data.country),
-        state: normalize.string(data.state),
-        city: normalize.string(data.city),
-        address: normalize.string(data.address),
-        zip: normalize.string(data.zip),
+        phone: normalize.string(data.phone)
     };
     return Promise.resolve({wallet, params});
 };
