@@ -202,7 +202,7 @@ class RegisterPhoneNumberPage extends React.Component {
         }
 
         if (!this.state.phone) {
-            window.show_alert('warning', 'Verification', 'Please provide PHONE NUMBER');
+            window.show_alert('warning', 'Verification', 'Please provide PHONE');
             return;
         }
 

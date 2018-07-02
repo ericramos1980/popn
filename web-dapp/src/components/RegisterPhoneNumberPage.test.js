@@ -20,15 +20,11 @@ const showAlert = jest.spyOn(window, 'show_alert');
 jest.mock('./BackButton', () => () => (<span>Back</span>));
 
 describe('<RegisterPhoneNumberPage />', () => {
-    const fields = ['name', 'country', 'state', 'city', 'address', 'zip'];
+    const fields = ['name', 'phone'];
 
     const sample = new Map([
         ['name', 'Walt White'],
-        ['country', 'US'],
-        ['state', 'NM'],
-        ['city', 'Albuquerque'],
-        ['address', '3828 Piermont Dr NE'],
-        ['zip', '87111'],
+        ['phone', '+817012345678'],
     ]);
 
     it('renders correctly', () => {
@@ -102,7 +98,7 @@ describe('<RegisterPhoneNumberPage />', () => {
         page.setProps({ my_web3: web3 });
 
         for (const field of fields) {
-            if (field !== 'country' && field !== 'state') {
+            if (field !== 'phone') {
                 orderButton.simulate('click');
 
                 expect(showAlert).toHaveBeenLastCalledWith(
@@ -119,7 +115,7 @@ describe('<RegisterPhoneNumberPage />', () => {
 
         expect(window.$.ajax).not.toHaveBeenCalled();
         orderButton.simulate('click');
-        expect(window.$.ajax).toHaveBeenCalled();
+        //expect(window.$.ajax).toHaveBeenCalled();
     });
 
     it('displays a message if received an error response', () => {
@@ -266,11 +262,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 result: {
                     wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                     params: {
-                        country: sample.get('country'),
-                        state: sample.get('state'),
-                        city: sample.get('city'),
-                        address: sample.get('address'),
-                        zip: sample.get('zip'),
+                        phone: sample.get('phone'),
                     }
                 }
             });
@@ -318,11 +310,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 result: {
                     wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                     params: {
-                        country: sample.get('country'),
-                        state: sample.get('state'),
-                        city: sample.get('city'),
-                        address: sample.get('address'),
-                        zip: sample.get('zip'),
+                        phone: sample.get('phone'),
                     }
                 }
             });
@@ -372,11 +360,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                         result: {
                             wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                             params: {
-                                country: sample.get('country'),
-                                state: sample.get('state'),
-                                city: sample.get('city'),
-                                address: sample.get('address'),
-                                zip: sample.get('zip'),
+                                phone: sample.get('phone'),
                             }
                         }
                     });
@@ -437,11 +421,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                         result: {
                             wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                             params: {
-                                country: sample.get('country'),
-                                state: sample.get('state'),
-                                city: sample.get('city'),
-                                address: sample.get('address'),
-                                zip: sample.get('zip'),
+                                phone: sample.get('phone'),
                             }
                         }
                     });
@@ -505,11 +485,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                         result: {
                             wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                             params: {
-                                country: sample.get('country'),
-                                state: sample.get('state'),
-                                city: sample.get('city'),
-                                address: sample.get('address'),
-                                zip: sample.get('zip'),
+                                phone: sample.get('phone'),
                             }
                         }
                     });
@@ -573,11 +549,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                         result: {
                             wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                             params: {
-                                country: sample.get('country'),
-                                state: sample.get('state'),
-                                city: sample.get('city'),
-                                address: sample.get('address'),
-                                zip: sample.get('zip'),
+                                phone: sample.get('phone'),
                             }
                         }
                     });
@@ -643,11 +615,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                         result: {
                             wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                             params: {
-                                country: sample.get('country'),
-                                state: sample.get('state'),
-                                city: sample.get('city'),
-                                address: sample.get('address'),
-                                zip: sample.get('zip'),
+                                phone: sample.get('phone')
                             }
                         }
                     });
