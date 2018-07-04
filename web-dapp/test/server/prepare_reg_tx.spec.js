@@ -22,11 +22,7 @@ describe('prepare_reg_tx', () => {
             .send({
                 wallet: '0x1aa2d288d03d8397c193d2327ee7a7443d4ec3a1',
                 name: 'John Doe',
-                country: 'us',
-                state: 'ca',
-                city: 'Beverly Hills',
-                address: '1234, Balboa Drive',
-                zip: '90210',
+                phone: '+12345678',
             })
             .then(res => {
                 return expect(res.body.ok).toBeTruthy();

@@ -1,7 +1,7 @@
 'use strict';
 
 const db = require('../server-lib/session_store');
-const postApi = require('../server-lib/post_api');
+const twilioApi = require('../server-lib/twillio_api');
 const logger = require('../server-lib/logger');
 const {validate, normalize} = require('../server-lib/validations');
 const {createResponseObject} = require('../server-lib/utils');
@@ -108,7 +108,7 @@ const getAddressByBN = (opts, prelog = '') => {
 };
 
 const createPostCard = (opts, prelog) => {
-    const {wallet, txId, address, confirmationCodePlain} = opts;
+    const {wallet, txId, phone, confirmationCodePlain} = opts;
     return new Promise((resolve, reject) => {
         logger.log(`${prelog} locking mutex`);
         return db.mutexLock('postcardsSentMutex').then(() => {
@@ -120,7 +120,7 @@ const createPostCard = (opts, prelog) => {
                         return reject(createResponseObject(false, 'Max limit of postcards reached, please try again tomorrow'));
                     });
                 }
-                postApi.create_postcard(wallet, address, txId, confirmationCodePlain, function (err, result) {
+                twilioApi.send_text(wallet, phone, txId, confirmationCodePlain, function (err, result) {
                     if (err) {
                         logger.error(`${prelog} error returned by create_postcard: ${err}`);
                         logger.log(`${prelog} unlocking mutex`);

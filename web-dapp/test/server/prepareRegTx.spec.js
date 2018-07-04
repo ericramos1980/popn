@@ -107,21 +107,13 @@ describe('Prepare Reg Transaction', () => {
             const data = {
                 wallet,
                 name: 'John Doe',
-                country: 'us',
-                state: 'ca',
-                city: 'Los Angeles',
-                address: '1219 Diane Street',
-                zip: '90013',
+                phone: '+12345678',
             };
             return prepareRegTx.validateData(data)
                 .then(({wallet, params}) => {
                     expect(wallet).toEqual(data.wallet);
                     expect(params.name).toEqual(data.name.trim().toLowerCase());
-                    expect(params.country).toEqual(data.country.trim().toLowerCase());
-                    expect(params.state).toEqual(data.state.trim().toLowerCase());
-                    expect(params.city).toEqual(data.city.trim().toLowerCase());
-                    expect(params.address).toEqual(data.address.trim().toLowerCase());
-                    expect(params.zip).toEqual(data.zip.trim().toLowerCase());
+                    expect(params.phone).toEqual(data.phone.trim().toLowerCase());
                     expect(params).not.toHaveProperty('wallet');
                 });
         });

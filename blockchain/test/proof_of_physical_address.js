@@ -110,7 +110,7 @@ contract('address registration (success)', function(accounts) {
             assert.equal(+users, 1);
             assert.equal(+confirmed, 0);
 
-            const args2 = buildRegisterAddressArgs(accounts[0], { state: 'al' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '012' });
             await registerAddress(popa, args2, accounts[0]);
 
             addresses = await popa.totalAddresses();
@@ -207,73 +207,9 @@ contract('address registration (fail)', function(accounts) {
     });
 
     contract('', () => {
-        it('registerAddress should fail if country is empty', async () => {
+        it('registerAddress should fail if phone is empty', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0], { country: '' });
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if state is empty', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0], { state: '' });
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if city is empty', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0], { city: '' });
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if address is empty', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0], { address: '' });
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if zip code is empty', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0], { zip: '' });
+            const args = buildRegisterAddressArgs(accounts[0], { phone: '' });
 
             await registerAddress(popa, args, accounts[0])
                 .then(
@@ -336,78 +272,10 @@ contract('address registration (fail)', function(accounts) {
     });
 
     contract('', () => {
-        it('registerAddress should fail if country is different', async () => {
+        it('registerAddress should fail if phone is different', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args = buildRegisterAddressArgs(accounts[0]);
-            args.country = 'ar';
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if state is different', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0]);
-            args.state = 'al';
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if city is different', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0]);
-            args.city = 'new york';
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if location is different', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0]);
-            args.address = '742 evergreen terrace';
-
-            await registerAddress(popa, args, accounts[0])
-                .then(
-                    () => assert.fail(), // should reject
-                    async () => {
-                        const addresses = await popa.totalAddresses();
-                        assert.equal(+addresses, 0);
-                    }
-                );
-        });
-    });
-
-    contract('', () => {
-        it('registerAddress should fail if zip is different', async () => {
-            const popa = await ProofOfPhysicalAddress.deployed();
-            const args = buildRegisterAddressArgs(accounts[0]);
-            args.zip = '12345';
+            args.phone = 'al';
 
             await registerAddress(popa, args, accounts[0])
                 .then(
@@ -554,9 +422,9 @@ contract('address removal', function(accounts) {
     contract('', () => {
         it('should allow to unregister an address (1 of 3)', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { address: '742 evergreen terrace' });
-            const args2 = buildRegisterAddressArgs(accounts[0], { address: '743 evergreen terrace' });
-            const args3 = buildRegisterAddressArgs(accounts[0], { address: '744 evergreen terrace' });
+            const args1 = buildRegisterAddressArgs(accounts[0], { phone: '742 evergreen terrace' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '743 evergreen terrace' });
+            const args3 = buildRegisterAddressArgs(accounts[0], { phone: '744 evergreen terrace' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -570,19 +438,19 @@ contract('address removal', function(accounts) {
             addressesCount = await popa.userSubmittedAddressesCount(accounts[0]);
             assert.equal(+addressesCount, 2);
 
-            const [, , , location1] = await popa.userAddress(accounts[0], 0);
-            const [, , , location2] = await popa.userAddress(accounts[0], 1);
-            assert.equal(location1, '744 evergreen terrace');
-            assert.equal(location2, '743 evergreen terrace');
+            const phone1 = await popa.userAddress(accounts[0], 0);
+            const phone2 = await popa.userAddress(accounts[0], 1);
+            assert.equal(phone1, '744 evergreen terrace');
+            assert.equal(phone2, '743 evergreen terrace');
         });
     });
 
     contract('', () => {
         it('should allow to unregister an address (2 of 3)', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { address: '742 evergreen terrace' });
-            const args2 = buildRegisterAddressArgs(accounts[0], { address: '743 evergreen terrace' });
-            const args3 = buildRegisterAddressArgs(accounts[0], { address: '744 evergreen terrace' });
+            const args1 = buildRegisterAddressArgs(accounts[0], { phone: '742 evergreen terrace' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '743 evergreen terrace' });
+            const args3 = buildRegisterAddressArgs(accounts[0], { phone: '744 evergreen terrace' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -596,19 +464,19 @@ contract('address removal', function(accounts) {
             addressesCount = await popa.userSubmittedAddressesCount(accounts[0]);
             assert.equal(+addressesCount, 2);
 
-            const [, , , location1] = await popa.userAddress(accounts[0], 0);
-            const [, , , location2] = await popa.userAddress(accounts[0], 1);
-            assert.equal(location1, '742 evergreen terrace');
-            assert.equal(location2, '744 evergreen terrace');
+            const phone1 = await popa.userAddress(accounts[0], 0);
+            const phone2 = await popa.userAddress(accounts[0], 1);
+            assert.equal(phone1, '742 evergreen terrace');
+            assert.equal(phone2, '744 evergreen terrace');
         });
     });
 
     contract('', () => {
         it('should allow to unregister an address (3 of 3)', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { address: '742 evergreen terrace' });
-            const args2 = buildRegisterAddressArgs(accounts[0], { address: '743 evergreen terrace' });
-            const args3 = buildRegisterAddressArgs(accounts[0], { address: '744 evergreen terrace' });
+            const args1 = buildRegisterAddressArgs(accounts[0], { phone: '742 evergreen terrace' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '743 evergreen terrace' });
+            const args3 = buildRegisterAddressArgs(accounts[0], { phone: '744 evergreen terrace' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -622,10 +490,10 @@ contract('address removal', function(accounts) {
             addressesCount = await popa.userSubmittedAddressesCount(accounts[0]);
             assert.equal(+addressesCount, 2);
 
-            const [, , , location1] = await popa.userAddress(accounts[0], 0);
-            const [, , , location2] = await popa.userAddress(accounts[0], 1);
-            assert.equal(location1, '742 evergreen terrace');
-            assert.equal(location2, '743 evergreen terrace');
+            const phone1 = await popa.userAddress(accounts[0], 0);
+            const phone2 = await popa.userAddress(accounts[0], 1);
+            assert.equal(phone1, '742 evergreen terrace');
+            assert.equal(phone2, '743 evergreen terrace');
         });
     });
 
@@ -639,7 +507,7 @@ contract('address removal', function(accounts) {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
             const args2 = buildRegisterAddressArgs(accounts[0], {
-                address: '186 berry st',
+                phone: '186 berry st',
             });
 
             await registerAddress(popa, args1, accounts[0]);
@@ -660,7 +528,7 @@ contract('address removal', function(accounts) {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
             const args2 = buildRegisterAddressArgs(accounts[0], {
-                address: '186 berry st',
+                phone: '186 berry st',
             });
 
             await registerAddress(popa, args1, accounts[0]);
@@ -752,7 +620,7 @@ contract('address removal', function(accounts) {
         it('should not decrement totalUsers value if the unregistered address was not the only one for that user', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
-            const args2 = buildRegisterAddressArgs(accounts[0], { address: '742 evergreen terrace' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '002' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1323,7 +1191,7 @@ contract('helpers', function(accounts) {
         it('userAddressByCreationBlock should work if the user has more than one address', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
-            const args2 = buildRegisterAddressArgs(accounts[0], { state: 'al' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '001' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1398,7 +1266,7 @@ contract('helpers', function(accounts) {
         it('userAddressByConfirmationCode should work if the user has more than one address', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
-            const args2 = buildRegisterAddressArgs(accounts[0], { state: 'al', cc: 'quux' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '001', cc: 'quux' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1416,7 +1284,7 @@ contract('helpers', function(accounts) {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args = buildRegisterAddressArgs(accounts[0]);
 
-            await popa.userAddressByAddress(accounts[0], args.country, args.state, args.city, args.address, args.zip)
+            await popa.userAddressByAddress(accounts[0], args.phone)
                 .then(
                     () => assert.fail(), // should reject
                     () => {}
@@ -1431,7 +1299,7 @@ contract('helpers', function(accounts) {
 
             await registerAddress(popa, args, accounts[0]);
 
-            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args.country, args.state, args.city, args.address, args.zip);
+            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args.phone);
             assert.isTrue(found);
             assert.equal(+index, 0);
             assert.isFalse(isConfirmed);
@@ -1446,7 +1314,7 @@ contract('helpers', function(accounts) {
             await registerAddress(popa, args, accounts[0]);
             await confirmAddress(popa, args.cc, accounts[0]);
 
-            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args.country, args.state, args.city, args.address, args.zip);
+            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args.phone);
             assert.isTrue(found);
             assert.equal(+index, 0);
             assert.isTrue(isConfirmed);
@@ -1460,7 +1328,7 @@ contract('helpers', function(accounts) {
 
             await registerAddress(popa, args, accounts[0]);
 
-            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args.country, 'al', args.city, args.address, args.zip);
+            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], "+81505555"/*args.phone*/);
             assert.isFalse(found);
             assert.equal(+index, 0);
             assert.isFalse(isConfirmed);
@@ -1471,12 +1339,12 @@ contract('helpers', function(accounts) {
         it('userAddressByAddress should work if the user has more than one address', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
             const args1 = buildRegisterAddressArgs(accounts[0]);
-            const args2 = buildRegisterAddressArgs(accounts[0], { state: 'al' });
+            const args2 = buildRegisterAddressArgs(accounts[0], { phone: '+8150123' });
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
 
-            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args2.country, args2.state, args2.city, args2.address, args2.zip);
+            const [found, index, isConfirmed] = await popa.userAddressByAddress(accounts[0], args2.phone);
             assert.isTrue(found);
             assert.equal(+index, 1);
             assert.isFalse(isConfirmed);
@@ -1511,8 +1379,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userLastSubmittedName should work if there are multiple addresses', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1551,8 +1419,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userLastConfirmedName should work if there are multiple addresses confirmed', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1567,8 +1435,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userLastConfirmedName should work if there is a non-confirmed address and a confirmed address', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1582,8 +1450,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userLastConfirmedName should work if there is a confirmed address and a non-confirmed address', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1597,8 +1465,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userLastConfirmedName should return an empty string if there are addresses but none is confirmed', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1622,8 +1490,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userSubmittedAddressesCount should return the number of registered addresses', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '+817000000001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '+817000000002'});
 
             await registerAddress(popa, args1, accounts[0]);
             let submittedCount = await popa.userSubmittedAddressesCount(accounts[0]);
@@ -1649,8 +1517,8 @@ contract('helpers', function(accounts) {
     contract('', () => {
         it('userConfirmedAddressesCount should return the number of confirmed addresses', async () => {
             const popa = await ProofOfPhysicalAddress.deployed();
-            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', address: '1 street'});
-            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', address: '2 street'});
+            const args1 = buildRegisterAddressArgs(accounts[0], { cc: 'foo', name: 'john', phone: '+817000000001'});
+            const args2 = buildRegisterAddressArgs(accounts[0], { cc: 'bar', name: 'paul', phone: '+817000000002'});
 
             await registerAddress(popa, args1, accounts[0]);
             await registerAddress(popa, args2, accounts[0]);
@@ -1700,13 +1568,9 @@ contract('helpers', function(accounts) {
 
             await registerAddress(popa, args, accounts[0]);
 
-            const [country, state, city, location, zip] = await popa.userAddress(accounts[0], 0);
+            const phone = await popa.userAddress(accounts[0], 0);
 
-            assert.equal(country, args.country);
-            assert.equal(state, args.state);
-            assert.equal(city, args.city);
-            assert.equal(location, args.address);
-            assert.equal(zip, args.zip);
+            assert.equal(phone, args.phone);
         });
     });
 
@@ -1750,7 +1614,7 @@ contract('helpers', function(accounts) {
             assert.equal(name, args.name);
             assert.equal(+creationBlock, web3.eth.blockNumber);
             assert.equal(+confirmationBlock, 0);
-            assert.equal(keccakIdentifier, web3.sha3(args.country + args.state + args.city + args.address + args.zip));
+            assert.equal(keccakIdentifier, web3.sha3(args.phone));
         });
     });
 });
@@ -1766,11 +1630,7 @@ function buildRegisterAddressArgs(account, extraArgs = {}, privateKey = privateK
     const baseArgs = {
         wallet: account,
         name: 'john doe',
-        country: 'us',
-        state: 'ca',
-        city: 'san francisco',
-        address: '185 berry st',
-        zip: '94107',
+        phone: '+817012345678',
         priceWei: '40000000000000000',
         cc: '8hwpyynkd9',
     };
@@ -1790,11 +1650,7 @@ function buildRegisterAddressArgs(account, extraArgs = {}, privateKey = privateK
 function registerAddress(popa, args, account, value = args.priceWei) {
     return popa.registerAddress(
         args.name,
-        args.country,
-        args.state,
-        args.city,
-        args.address,
-        args.zip,
+        args.phone,
         args.priceWei,
         args.sha3cc,
         args.sigV,
@@ -1824,11 +1680,7 @@ function confirmAddress(popa, cc, account, privateKey = privateKeys[0]) {
 
 function unregisterAddress(popa, args, account) {
     return popa.unregisterAddress(
-        args.country,
-        args.state,
-        args.city,
-        args.address,
-        args.zip,
+        args.phone,
         {
             from: account,
         }

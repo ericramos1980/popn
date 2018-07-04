@@ -10,11 +10,7 @@ function buildSignature(params, privateKey) {
         params.wallet +
         Buffer.concat([
             Buffer.from(params.name, 'utf8'),
-            Buffer.from(params.country, 'utf8'),
-            Buffer.from(params.state, 'utf8'),
-            Buffer.from(params.city, 'utf8'),
-            Buffer.from(params.address, 'utf8'),
-            Buffer.from(params.zip, 'utf8'),
+            Buffer.from(params.phone, 'utf8'),
             Buffer.from(priceWei, 'hex'),
             Buffer.from(params.sha3cc.substr(2), 'hex'),
         ]).toString('hex');
