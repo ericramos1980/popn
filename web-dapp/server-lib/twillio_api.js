@@ -1,10 +1,11 @@
 'use strict';
+const config = require('../server-config');
 const logger = require('./logger');
 const twilio = require('twilio');
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const fromTelNumber = process.env.TWILIO_FROM_NUMBER;
+const accountSid = config.twilioAccountSid;
+const authToken = config.twilioAuthToken;
+const fromTelNumber = config.twilioFromNo;
 
 var prelog = '[twillio_api] ';
 logger.log(prelog + 'loading twillio');
