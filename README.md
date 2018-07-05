@@ -1,9 +1,9 @@
 # POA network - Proof of Physical Address (PoPA)
 
-[![Build Status](https://travis-ci.org/cryptoeconomicslab/poa-posms.svg?branch=master)](https://travis-ci.org/cryptoeconomicslab/poa-posms)
-[![Coverage Status](https://coveralls.io/repos/github/cryptoeconomicslab/poa-posms/badge.svg?branch=master)](https://coveralls.io/github/cryptoeconomicslab/poa-posms?branch=master)
-[![dependencies Status](https://david-dm.org/cryptoeconomicslab/poa-posms/status.svg)](https://david-dm.org/cryptoeconomicslab/poa-posms)
-[![devDependencies Status](https://david-dm.org/cryptoeconomicslab/poa-posms/dev-status.svg)](https://david-dm.org/cryptoeconomicslab/poa-posms?type=dev)
+[![Build Status](https://travis-ci.org/cryptoeconomicslab/popn.svg?branch=master)](https://travis-ci.org/cryptoeconomicslab/popn)
+[![Coverage Status](https://coveralls.io/repos/github/cryptoeconomicslab/popn/badge.svg?branch=master)](https://coveralls.io/github/cryptoeconomicslab/popn?branch=master)
+[![dependencies Status](https://david-dm.org/cryptoeconomicslab/popn/status.svg)](https://david-dm.org/cryptoeconomicslab/popn)
+[![devDependencies Status](https://david-dm.org/cryptoeconomicslab/popn/dev-status.svg)](https://david-dm.org/cryptoeconomicslab/popn?type=dev)
 
 - [Identity DApps](#identity-dapps)
 - [Proof of Physical Address (PoPA)](#proof-of-physical-address-popa)
