@@ -26,7 +26,7 @@ contract ProofOfPhysicalAddress {
         bytes32 confirmationCodeSha3;
     }
 
-    function ProofOfPhysicalAddress(address _registry) public
+    constructor(address _registry) public
     {
         owner = msg.sender;
         signer = owner;
@@ -199,7 +199,7 @@ contract ProofOfPhysicalAddress {
 
     // returns name from the last confirmed address. If no addresses were confirmed returns ''
     function userLastConfirmedName(address wallet)
-    public constant checkUserExists(wallet) returns (string)
+    public checkUserExists(wallet) view returns (string)
     {
         for (uint256 ai = users[wallet].physicalAddresses.length; ai > 0;) {
             ai--;
