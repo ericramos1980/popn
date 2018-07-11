@@ -1,6 +1,9 @@
 {
   "name": "proof-of-address",
   "version": "1.0.0",
+  "engines": {
+    "npm": "5.7.x"
+  },
   "description": "Smart contract and DApp by poa.network to create proof of a physical address",
   "license": "MIT",
   "main": "server.js",

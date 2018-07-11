@@ -1,9 +1,6 @@
 {
   "name": "web-dapp",
   "version": "0.1.0",
-  "engines": {
-    "npm": "5.7.x"
-  },
   "private": true,
   "scripts": {
     "start": "react-scripts start",
