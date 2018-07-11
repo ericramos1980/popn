@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run build-css && react-scripts build",
-    "build-css": "node-sass ./src/assets/stylesheets/application.scss ./src/assets/stylesheets/application.css",
+    "build-css": "./nodu_modules/.bin/node-sass ./src/assets/stylesheets/application.scss ./src/assets/stylesheets/application.css",
     "test": "react-scripts test --testMatch **/test/server/**/*.spec.js **/src/**/*.test.js --env=jsdom --coverage",
     "postinstall": "npm run build"
   },
