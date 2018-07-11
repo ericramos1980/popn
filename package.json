@@ -11,7 +11,7 @@
     "build": "npm run build --prefix web-dapp",
     "coverage": "lcov-result-merger '?(blockchain|web-dapp)/coverage/lcov.info' | coveralls",
     "lint": "eslint .",
-    "postinstall": "npm install --prefix web-dapp && npm install --prefix blockchain && npm run build",
+    "postinstall": "npm install --prefix blockchain && npm run build",
     "prepush": "npm run lint && npm test",
     "start": "node web-dapp/server",
     "start-testrpc": "./scripts/start_testrpc.sh",
@@ -22,7 +22,8 @@
     "bootstrap": "^4.1.1",
     "font-awesome": "^4.7.0",
     "solc": "0.4.19",
-    "web3": "^0.20.4"
+    "web3": "^0.20.4",
+    "web-dapp": "file:./web-dapp"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
