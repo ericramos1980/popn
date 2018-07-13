@@ -11,7 +11,8 @@ function parseTxData(input) {
     const params = registerAddressAbi.inputs.map(x => x.type);
     const args = abi.rawDecode(params, Buffer.from(input.slice(10), 'hex'));
 
-    return '0x' + args[7].toString('hex');
+    //confirmation code is 3rd args of registerAddress
+    return '0x' + args[3].toString('hex');
 }
 
 function getSha3cc(txId) {

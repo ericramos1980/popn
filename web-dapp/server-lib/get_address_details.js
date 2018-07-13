@@ -8,11 +8,7 @@ module.exports = (addressIndex, wallet) => {
         config.contract.userAddress(wallet, addressIndex[1], function (err, details) {
             if (err) return reject(createResponseObject(false, 'error getting address details from contract'));
             const address_details = {
-                country: details[0],
-                state: details[1],
-                city: details[2],
-                location: details[3],
-                zip: details[4],
+                phone: details[0],
             };
             return resolve(address_details);
         });

@@ -101,11 +101,7 @@ class RegisterPhoneNumberPage extends React.Component {
             logger.debug('call contract.userAddressByAddress');
             contract.userAddressByAddress(
                 opts.wallet,
-                opts.params.country,
-                opts.params.state,
-                opts.params.city,
-                opts.params.address,
-                opts.params.zip,
+                opts.params.phone,
                 { from: opts.wallet }, (err, result) => {
                     if (err) {
                         logger.debug('Error calling contract.userAddressByAddress:', err);

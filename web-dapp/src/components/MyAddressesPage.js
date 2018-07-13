@@ -10,6 +10,7 @@ import waitForTransaction from '../waitForTransaction';
 import '../assets/javascripts/show-alert.js';
 
 const logger = log.getLogger('ConfirmationPage');
+log.setLevel("debug", true)
 
 const range = n => [...Array(n)].map((x, i) => i)
 
@@ -44,9 +45,9 @@ class ConfirmationPage extends React.Component {
 
                 const whenAddresses = range(totalAddresses).map((index) => {
                     const whenAddressInfo = this.getAddress(wallet, index)
-                        .then(([country, state, city, location, zip]) => {
+                        .then(([phone]) => {
                             return {
-                                country, state, city, location, zip
+                                phone
                             }
                         })
                     const whenAddressConfirmed = this.isAddressConfirmed(wallet, index)
@@ -63,6 +64,8 @@ class ConfirmationPage extends React.Component {
                 Promise.all(whenAddresses).then(addresses => {
                     this.setState({addresses})
                 })
+            }).catch((err) => {
+                console.log(err)
             })
     }
 
@@ -138,7 +141,7 @@ class ConfirmationPage extends React.Component {
                     <h1 className="main-title">Manage your addresses</h1>
                     {this.state.addresses.length !== 0 ? (
                     <div className="mb-4">
-                        { this.state.addresses.map(({country, state, city, location, zip, confirmed}, index) => (
+                        { this.state.addresses.map(({phone, confirmed}, index) => (
                                 <div className="card-item d-flex wait-to-verify mt-3 p-3 address" key={index}>
                                     <img className={confirmed ? 'image-verify d-flex done' : 'image-no-verify d-flex clock'} src={require('../assets/images/card-item/clock.png')}
                                          srcSet={confirmed ? `
@@ -149,10 +152,10 @@ class ConfirmationPage extends React.Component {
                                             ${require('../assets/images/card-item/clock@3x.png')} 3x
                                          `} />
                                     <div className="item-adress">
-                                        {location}, {zip}, {city}, {state}, {country}
+                                        {phone}
                                     </div>
                                     <div className="wrap-btn">
-                                        <a href="" className="remove-button" onClick={(e) => this.remove(e, country, state, city, location, zip)} title="Remove address">
+                                        <a href="" className="remove-button" onClick={(e) => this.remove(e, phone)} title="Remove address">
                                             <i className="fa fa-trash"></i>
                                         </a>
                                     </div>
