@@ -240,7 +240,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback({
                             message: 'Error calling contract.userAddressByAddress'
                         });
@@ -290,7 +290,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [true]);
                     })
                 }}
@@ -338,7 +338,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [false]);
                     })
                 }}
@@ -399,7 +399,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [false]);
                     })
                 }}
@@ -463,7 +463,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [false]);
                     })
                 }}
@@ -527,7 +527,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [false]);
                     })
                 }}
@@ -593,7 +593,7 @@ describe('<RegisterPhoneNumberPage />', () => {
                 my_web3={web3}
                 contract={{
                     ...contract,
-                    userAddressByAddress: jest.fn((walet, country, state, city, address, zip, opts, callback) => {
+                    userAddressByAddress: jest.fn((walet, phone, opts, callback) => {
                         return callback(null, [false]);
                     })
                 }}
