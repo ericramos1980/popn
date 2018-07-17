@@ -14,7 +14,7 @@ const checkUserExists = jest.spyOn(RegisterPhoneNumberPage.prototype, 'check_use
 const checkWalletSame = jest.spyOn(RegisterPhoneNumberPage.prototype, 'check_wallet_same');
 const onChange = jest.spyOn(RegisterPhoneNumberPage.prototype, 'on_change');
 const orderClicked = jest.spyOn(RegisterPhoneNumberPage.prototype, 'order_clicked');
-const registerAddress = jest.spyOn(RegisterPhoneNumberPage.prototype, 'registerAddress');
+const registerPhone = jest.spyOn(RegisterPhoneNumberPage.prototype, 'registerPhone');
 const showAlert = jest.spyOn(window, 'show_alert');
 
 jest.mock('./BackButton', () => () => (<span>Back</span>));
@@ -377,7 +377,7 @@ describe('<RegisterPhoneNumberPage />', () => {
             return callback(null, true);
         });
 
-        registerAddress.mockImplementationOnce((opts, callback) => {
+        registerPhone.mockImplementationOnce((opts, callback) => {
             return callback(null, '0xfd3c97d14b3979cc6356a92b79b3ac8038f0065fc5079c6a0a0ff9b0c0786291');
         });
 
@@ -441,7 +441,7 @@ describe('<RegisterPhoneNumberPage />', () => {
             return callback(null, true);
         });
 
-        registerAddress.mockImplementationOnce((opts, callback) => {
+        registerPhone.mockImplementationOnce((opts, callback) => {
             return callback({ message: 'error message' });
         });
 
@@ -505,7 +505,7 @@ describe('<RegisterPhoneNumberPage />', () => {
             return callback(null, true);
         });
 
-        registerAddress.mockImplementationOnce((opts, callback) => {
+        registerPhone.mockImplementationOnce((opts, callback) => {
             return callback();
         });
 
@@ -566,7 +566,7 @@ describe('<RegisterPhoneNumberPage />', () => {
             return callback(null, true);
         });
 
-        registerAddress.mockImplementationOnce((opts, callback) => {
+        registerPhone.mockImplementationOnce((opts, callback) => {
             return callback(null, '0xfd3c97d14b3979cc6356a92b79b3ac8038f0065fc5079c6a0a0ff9b0c0786291');
         });
 
@@ -635,7 +635,7 @@ describe('<RegisterPhoneNumberPage />', () => {
             return callback(null, true);
         });
 
-        registerAddress.mockImplementationOnce((opts, callback) => {
+        registerPhone.mockImplementationOnce((opts, callback) => {
             return callback(null, '0xfd3c97d14b3979cc6356a92b79b3ac8038f0065fc5079c6a0a0ff9b0c0786291');
         });
 

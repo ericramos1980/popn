@@ -24,7 +24,7 @@ class RegisterPhoneNumberPage extends React.Component {
         this.check_wallet_same = this.check_wallet_same.bind(this);
         this.check_user_exists = this.check_user_exists.bind(this);
         this.check_address_exists = this.check_address_exists.bind(this);
-        this.registerAddress = this.registerAddress.bind(this);
+        this.registerPhone = this.registerPhone.bind(this);
         this.order_clicked = this.order_clicked.bind(this);
     }
 
@@ -114,10 +114,10 @@ class RegisterPhoneNumberPage extends React.Component {
         });
     };
 
-    registerAddress(opts, callback) {
+    registerPhone(opts, callback) {
         const contract = this.props.contract;
 
-        logger.debug('Calling contract.registerPhone.estimateGas');
+        logger.debug('Calling contract.registerAddress.estimateGas');
         logger.debug('opts = ' + JSON.stringify(opts));
 
         opts.params.priceWei = new this.props.my_web3.BigNumber(opts.params.priceWei);
@@ -249,10 +249,10 @@ class RegisterPhoneNumberPage extends React.Component {
                         return;
                     }
 
-                    logger.debug('calling registerAddress');
-                    this.registerAddress(res.result, (err, txId) => {
+                    logger.debug('calling registerPhone');
+                    this.registerPhone(res.result, (err, txId) => {
                         if (err) {
-                            logger.debug('Error occured in registerAddress: ', err);
+                            logger.debug('Error occured in registerPhone: ', err);
                             this.setState({ loading: false });
                             window.show_alert('error', 'Register address', [['Error', err.message]]);
                         } else if (txId) {
