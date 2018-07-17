@@ -41,7 +41,7 @@ A more detailed schematic view of the process:
 
     ```
     $ git clone https://github.com/cryptoeconomicslab/popn.git
-    $ cd poa-popa
+    $ cd popn
     ```
 
     In the following steps, we'll refer to this directory as `$REPO_DIR`.
