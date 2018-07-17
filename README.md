@@ -65,8 +65,6 @@ example:
 
     This file exports a config object whose keys will replace the ones in `web-dapp/server-config.js`.
 
-    _Note:_ you can get the `lobApiKey` registering on [Lob](https://lob.com/) and copying your **Test API Key** from **User -> Settings -> API Keys**.
-
 1. Open a new terminal and start testrpc with a set of predefined accounts:
 
     ```
@@ -84,7 +82,11 @@ example:
 
     This will send several transactions. One of them will create the PoPA contract. You have to have its address in the `.env` file. If you followed these steps, the address will be the same as the one in `.env.example`, so it will be enough to copy it:
 
-    Set SIGNER_PRIVATE_KEY.
+    _Note: Set SIGNER_PRIVATE_KEY for signing a transaction from popn server.
+
+    _Note:_ you can get the `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER` registering on [twilio](https://www.twilio.com/).
+
+
 
     ```
     $ cd $REPO_DIR
