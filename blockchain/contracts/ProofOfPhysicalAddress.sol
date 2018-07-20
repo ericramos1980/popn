@@ -14,12 +14,7 @@ contract ProofOfPhysicalAddress {
     // Main structures:
     struct PhysicalAddress {
         string name;
-
-        string country;
-        string state;
-        string city;
-        string location;
-        string zip;
+        string phone;
 
         uint256 creationBlock;
         bytes32 keccakIdentifier;
@@ -167,10 +162,10 @@ contract ProofOfPhysicalAddress {
     }
 
     // returns (found/not found, index if found/0 if not found, confirmed/not confirmed)
-    function userAddressByAddress(address wallet, string country, string state, string city, string location, string zip)
+    function userAddressByAddress(address wallet, string phone)
     public view checkUserExists(wallet) returns(bool, uint256, bool)
     {
-        bytes32 keccakIdentifier = keccak256(country, state, city, location, zip);
+        bytes32 keccakIdentifier = keccak256(phone);
         return userAddressByKeccakIdentifier(wallet, keccakIdentifier);
     }
 
@@ -232,14 +227,10 @@ contract ProofOfPhysicalAddress {
 
     function userAddress(address wallet, uint256 addressIndex)
     public view checkUserExists(wallet) validIndex(wallet, addressIndex) returns (
-        string country, string state, string city, string location, string zip)
+        string phone)
     {
         return (
-            users[wallet].physicalAddresses[addressIndex].country,
-            users[wallet].physicalAddresses[addressIndex].state,
-            users[wallet].physicalAddresses[addressIndex].city,
-            users[wallet].physicalAddresses[addressIndex].location,
-            users[wallet].physicalAddresses[addressIndex].zip
+            users[wallet].physicalAddresses[addressIndex].phone
         );
     }
 
@@ -269,28 +260,20 @@ contract ProofOfPhysicalAddress {
     // Main methods:
     function registerAddress(
         string name,
-        string country, string state, string city, string location, string zip,
+        string phone,
         uint256 priceWei,
         bytes32 confirmationCodeSha3, uint8 sigV, bytes32 sigR, bytes32 sigS)
     public payable
     {
         require(bytes(name).length > 0);
-        require(bytes(country).length > 0);
-        require(bytes(state).length > 0);
-        require(bytes(city).length > 0);
-        require(bytes(location).length > 0);
-        require(bytes(zip).length > 0);
+        require(bytes(phone).length > 0);
         require(msg.value >= priceWei);
         require(users[msg.sender].physicalAddresses.length < 2**256-1);
 
         bytes32 data = keccak256(
             msg.sender,
             name,
-            country,
-            state,
-            city,
-            location,
-            zip,
+            phone,
             priceWei,
             confirmationCodeSha3
         );
@@ -299,7 +282,7 @@ contract ProofOfPhysicalAddress {
         if (userExists(msg.sender)) {
             // check if this address is already registered
             bool found;
-            (found, , ) = userAddressByAddress(msg.sender, country, state, city, location, zip);
+            (found, , ) = userAddressByAddress(msg.sender, phone);
 
             require(!found);
         } else {
@@ -312,14 +295,10 @@ contract ProofOfPhysicalAddress {
         PhysicalAddress memory pa;
 
         pa.name = name;
-        pa.country = country;
-        pa.state = state;
-        pa.city = city;
-        pa.location = location;
-        pa.zip = zip;
+        pa.phone = phone;
         pa.creationBlock = block.number;
         pa.confirmationCodeSha3 = confirmationCodeSha3;
-        pa.keccakIdentifier = keccak256(country, state, city, location, zip);
+        pa.keccakIdentifier = keccak256(phone);
         users[msg.sender].physicalAddresses.push(pa);
 
         totalAddresses += 1;
@@ -327,13 +306,13 @@ contract ProofOfPhysicalAddress {
         LogAddressRegistered(msg.sender, pa.keccakIdentifier);
     }
 
-    function unregisterAddress(string country, string state, string city, string location, string zip)
+    function unregisterAddress(string phone)
         public checkUserExists(msg.sender)
     {
         bool found;
         uint256 index;
         bool confirmed;
-        (found, index, confirmed) = userAddressByAddress(msg.sender, country, state, city, location, zip);
+        (found, index, confirmed) = userAddressByAddress(msg.sender, phone);
         require(found);
 
         bytes32 keccakIdentifier = users[msg.sender].physicalAddresses[index].keccakIdentifier;

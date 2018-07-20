@@ -1,4 +1,4 @@
-# POA network - Proof of Physical Address (PoPA)
+# Proof of Phone Number (PoPN)
 
 [![Build Status](https://travis-ci.org/cryptoeconomicslab/popn.svg?branch=master)](https://travis-ci.org/cryptoeconomicslab/popn)
 [![Coverage Status](https://coveralls.io/repos/github/cryptoeconomicslab/popn/badge.svg?branch=master)](https://coveralls.io/github/cryptoeconomicslab/popn?branch=master)
@@ -14,6 +14,10 @@
 - [Description](#description)
 - [Integration with EthereumClaimsRegistry (ERC780)](#integration-with-ethereumclaimsregistry-erc780)
 
+## Introduction
+
+This repository is modifying ( https://github.com/poanetwork/poa-popa ) for phone number confirmation.
+Forked from https://github.com/poanetwork/poa-popa.
 
 ## Identity DApps
 In POA Network, identity of individual validators plays a major role for selected consensus. We propose additional checks of identity, performed in a decentralized way. Proof of Identity DApps is a series of decentralized applications focused on connecting a user's identity to his/her wallet. Applications can be run on any Ethereum-compatible network.
@@ -36,8 +40,8 @@ A more detailed schematic view of the process:
 1. Clone this repository:
 
     ```
-    $ git clone https://github.com/poanetwork/poa-popa.git
-    $ cd poa-popa
+    $ git clone https://github.com/cryptoeconomicslab/popn.git
+    $ cd popn
     ```
 
     In the following steps, we'll refer to this directory as `$REPO_DIR`.
@@ -61,8 +65,6 @@ example:
 
     This file exports a config object whose keys will replace the ones in `web-dapp/server-config.js`.
 
-    _Note:_ you can get the `lobApiKey` registering on [Lob](https://lob.com/) and copying your **Test API Key** from **User -> Settings -> API Keys**.
-
 1. Open a new terminal and start testrpc with a set of predefined accounts:
 
     ```
@@ -79,6 +81,12 @@ example:
     ```
 
     This will send several transactions. One of them will create the PoPA contract. You have to have its address in the `.env` file. If you followed these steps, the address will be the same as the one in `.env.example`, so it will be enough to copy it:
+
+    _Note: Set SIGNER_PRIVATE_KEY for signing a transaction from popn server.
+
+    _Note:_ you can get the `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER` registering on [twilio](https://www.twilio.com/).
+
+
 
     ```
     $ cd $REPO_DIR

@@ -31,13 +31,14 @@ module.exports = () => {
             .then(txBn => {
                 return notifyRegTxController.getAddressByBN({wallet, txBn}, prelog);
             })
-            .then(address => {
+            .then(phone => {
                 const sha3cc = config.web3.sha3(confirmationCodePlain);
                 return notifyRegTxController.validateTx(txId, sha3cc)
-                    .then(() => address);
+                    .then(() => phone);
             })
-            .then(address => {
-                return notifyRegTxController.createPostCard({wallet, txId, address, confirmationCodePlain}, prelog);
+            .then(phoneData => {
+                const phone = phoneData.phone;
+                return notifyRegTxController.createPostCard({wallet, txId, phone, confirmationCodePlain}, prelog);
             })
             .then(postcard => {
                 logger.log(`${prelog} postcard: ${JSON.stringify(postcard)}`);
