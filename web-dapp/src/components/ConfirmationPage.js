@@ -109,11 +109,7 @@ class ConfirmationPage extends React.Component {
                     return callback(err);
                 }
                 logger.debug('***** RESULT=', result);
-                addressDetails.country = result[0];
-                addressDetails.state = result[1];
-                addressDetails.city = result[2];
-                addressDetails.address = result[3];
-                addressDetails.zip = result[4];
+                addressDetails.phone = result
                 return callback(null, addressDetails);
             });
         });
@@ -250,11 +246,7 @@ class ConfirmationPage extends React.Component {
                             this.setState({ loading: false });
                             window.show_alert('warning', 'Finding address to confirm', [
                                 ['This confirmation code corresponds to address that is already confirmed'],
-                                ['Country', address_details.country.toUpperCase()],
-                                ['State', address_details.state.toUpperCase()],
-                                ['City', address_details.city.toUpperCase()],
-                                ['Address', address_details.address.toUpperCase()],
-                                ['ZIP code', address_details.zip.toUpperCase()]
+                                ['Phone', address_details.phone.toUpperCase()]
                             ]);
                             return;
                         }
@@ -270,11 +262,7 @@ class ConfirmationPage extends React.Component {
                                             window.show_alert('success', 'Address confirmed!', [
                                                 ['Transaction to confirm address was submitted'],
                                                 ['Transaction ID', txId],
-                                                ['Country', address_details.country.toUpperCase()],
-                                                ['State', address_details.state.toUpperCase()],
-                                                ['City', address_details.city.toUpperCase()],
-                                                ['Address', address_details.address.toUpperCase()],
-                                                ['ZIP code', address_details.zip.toUpperCase()]
+                                                ['Phone', address_details.phone.toUpperCase()]
                                             ]);
                                             this.setState({ loading: false });
                                         })

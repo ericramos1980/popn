@@ -27,11 +27,7 @@ jest.mock('./BackButton', () => () => (<span>Back</span>));
 
 describe('<ConfirmationPage />', () => {
     const addressDetails = {
-        country: 'US',
-        state: 'NM',
-        city: 'Albuquerque',
-        address: '3828 Piermont Dr NE',
-        zip: '87111'
+        phone: '811234567890'
     };
 
     it('renders correctly', () => {
@@ -347,11 +343,7 @@ describe('<ConfirmationPage />', () => {
             'Finding address to confirm',
             [
                 ['This confirmation code corresponds to address that is already confirmed'],
-                ['Country', 'US'],
-                ['State', 'NM'],
-                ['City', 'ALBUQUERQUE'],
-                ['Address', '3828 PIERMONT DR NE'],
-                ['ZIP code', '87111']
+                ['Phone', '811234567890']
             ]
         );
     });
@@ -532,11 +524,7 @@ describe('<ConfirmationPage />', () => {
                 [
                     ['Transaction to confirm address was submitted'],
                     ['Transaction ID', '0xfd3c97d14b3979cc6356a92b79b3ac8038f0065fc5079c6a0a0ff9b0c0786291'],
-                    ['Country', 'US'],
-                    ['State', 'NM'],
-                    ['City', 'ALBUQUERQUE'],
-                    ['Address', '3828 PIERMONT DR NE'],
-                    ['ZIP code', '87111']
+                    ['Phone', '811234567890']
                 ]
             );
             done();
@@ -580,11 +568,7 @@ describe('<ConfirmationPage />', () => {
                 [
                     ['Transaction to confirm address was submitted'],
                     ['Transaction ID', '0xfd3c97d14b3979cc6356a92b79b3ac8038f0065fc5079c6a0a0ff9b0c0786291'],
-                    ['Country', 'US'],
-                    ['State', 'NM'],
-                    ['City', 'ALBUQUERQUE'],
-                    ['Address', '3828 PIERMONT DR NE'],
-                    ['ZIP code', '87111']
+                    ['Phone', '811234567890']
                 ]
             );
             done();
