@@ -1,3 +1,6 @@
+const SolTrace = require("sol-trace");
+SolTrace.injectInTruffle(web3, artifacts);
+
 const ProofOfPhysicalAddress = artifacts.require('ProofOfPhysicalAddress');
 const TestERC20 = artifacts.require('TestERC20');
 const BigNumber = require('bignumber.js');
