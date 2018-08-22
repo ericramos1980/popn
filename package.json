@@ -19,7 +19,6 @@
   "dependencies": {
     "bootstrap": "^4.1.1",
     "font-awesome": "^4.7.0",
-    "sol-trace": "github:maticnetwork/sol-trace",
     "solc": "0.4.19",
     "twilio": "^3.17.4",
     "web3": "^0.20.4"
